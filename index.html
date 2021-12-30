@@ -28,12 +28,36 @@
         engine: engine,
       });
 
+      const circle_radius = 20;
       // add a circle and rectangle
-      var circle = Bodies.circle(400, 200, 40);
+      var circle1 = Bodies.circle(100, 300, circle_radius);
+      var circle2 = Bodies.circle(200, 300, circle_radius);
+      var circle3 = Bodies.circle(300, 300, circle_radius);
+      var circle4 = Bodies.circle(400, 300, circle_radius);
+      var circle5 = Bodies.circle(500, 300, circle_radius);
+      var circle6 = Bodies.circle(600, 300, circle_radius);
+      var circle7 = Bodies.circle(700, 300, circle_radius);
       var ground = Bodies.rectangle(400, 585, 700, 30, { isStatic: true });
 
+      circle1.restitution = 0.1;
+      circle2.restitution = 0.2;
+      circle3.restitution = 0.3;
+      circle4.restitution = 0.4;
+      circle5.restitution = 0.5;
+      circle6.restitution = 0.6;
+      circle7.restitution = 0.7;
+
       // add all of the bodies to the world
-      Composite.add(engine.world, [circle, ground]);
+      Composite.add(engine.world, [
+        circle1,
+        circle2,
+        circle3,
+        circle4,
+        circle5,
+        circle6,
+        circle7,
+        ground,
+      ]);
 
       // run the renderer
       Render.run(render);
