@@ -16,6 +16,10 @@ window.addEventListener("load", () => {
     engine: engine,
   });
 
+  // makes canvas as big as the window
+  render.canvas.width = document.documentElement.clientWidth;
+  render.canvas.height = document.documentElement.clientHeight;
+
   const circle_radius = 20;
   // add a circle and rectangle
   var circle = Bodies.circle(100, 300, circle_radius);
