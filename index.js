@@ -14,6 +14,9 @@ window.addEventListener("load", () => {
   var render = Render.create({
     element: document.body,
     engine: engine,
+    options: {
+      wireframes: false,
+    },
   });
 
   // makes canvas as big as the window
@@ -22,11 +25,20 @@ window.addEventListener("load", () => {
 
   const circle_radius = 20;
   // add a circle and rectangle
-  var circle = Bodies.circle(100, 300, circle_radius);
-  Body.setStatic(circle, true);
+  var circle = Bodies.circle(
+    document.documentElement.clientWidth / 2,
+    document.documentElement.clientHeight * 0.2,
+    circle_radius
+  );
+  circle.restitution = 0.8;
+
+  var height = document.documentElement.clientHeight;
+  var width = document.documentElement.clientWidth;
+  var ground = Bodies.rectangle(width / 2, height, width - 30, 60);
+  Body.setStatic(ground, true);
 
   // add all of the bodies to the world
-  Composite.add(engine.world, [circle]);
+  Composite.add(engine.world, [circle, ground]);
 
   // run the renderer
   Render.run(render);
