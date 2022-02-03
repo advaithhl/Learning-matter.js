@@ -59,17 +59,18 @@ window.addEventListener("load", () => {
   Composite.add(engine.world, circle);
 
   var circle2 = Bodies.circle(
-    render.canvas.width / 4,
-    render.canvas.height * 0.30,
+    render.canvas.width / 5,
+    render.canvas.height * 0.20,
     10,
     {
       render: {
         fillStyle: "#FF5733",
       },
       restitution: 0.8,
+      frictionAir: 0,
     }
   );
-  Body.setVelocity(circle2, { x: 30, y: 0 });
+  Body.setVelocity(circle2, { x: 10, y: -10 });
   Composite.add(engine.world, circle2);
 
   // run the renderer
