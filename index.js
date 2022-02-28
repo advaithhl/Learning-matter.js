@@ -60,12 +60,38 @@ window.addEventListener("load", () => {
   // the attractor body must be added to the world before anything else.
   Composite.add(engine.world, circle);
 
-  for (var i = 0; i < 500; i += 1) {
+  const w = render.canvas.width;
+  const h = render.canvas.height;
+
+  const centerH = w / 2;
+  const centerK = h / 2;
+
+  const orbital_radius = 200;
+
+  console.log(w, h);
+
+  const getX = (Y) =>
+    centerH - Math.sqrt(orbital_radius ** 2 - (Y - centerK) ** 2);
+  const getY = (X) =>
+    centerK - Math.sqrt(orbital_radius ** 2 - (X - centerH) ** 2);
+
+  const positions = [
+    w * 0.38,
+    w * 0.4,
+    w * 0.45,
+    w * 0.5,
+    w * 0.55,
+    w * 0.6,
+    w * 0.62,
+  ];
+
+  for (var i = 0; i < positions.length; i += 1) {
+    x_pos = positions[i];
+    y_pos = getY(x_pos);
+    console.log(`Body ${i} X: ${x_pos}, Y: ${y_pos}`);
     var body = Bodies.circle(
-      // render.canvas.width/2,
-      // render.canvas.height/2,
-      Common.random(0, render.canvas.width),
-      Common.random(0, render.canvas.height),
+      x_pos,
+      y_pos,
       10
     );
     Composite.add(engine.world, body);
