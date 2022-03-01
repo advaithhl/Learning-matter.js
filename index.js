@@ -58,20 +58,74 @@ window.addEventListener("load", () => {
   // the attractor body must be added to the world before anything else.
   Composite.add(engine.world, circle);
 
-  var circle2 = Bodies.circle(
-    render.canvas.width / 5,
-    render.canvas.height * 0.20,
-    10,
-    {
-      render: {
-        fillStyle: "#FF5733",
-      },
-      restitution: 0.8,
-      frictionAir: 0,
-    }
-  );
-  Body.setVelocity(circle2, { x: 10, y: -10 });
-  Composite.add(engine.world, circle2);
+  const w = render.canvas.width;
+  const h = render.canvas.height;
+
+  const centerH = w / 2;
+  const centerK = h / 2;
+
+  const orbital_radius = 200;
+
+  console.log(w, h);
+
+  const getX = (Y) =>
+    centerH - Math.sqrt(orbital_radius ** 2 - (Y - centerK) ** 2);
+  const getY = (X) =>
+    centerK - Math.sqrt(orbital_radius ** 2 - (X - centerH) ** 2);
+
+  const positions = [
+    w * 0.38,
+    w * 0.4,
+    w * 0.45,
+    w * 0.5,
+    w * 0.55,
+    w * 0.6,
+    w * 0.62,
+  ];
+
+  for (var i = 0; i < positions.length; i += 1) {
+    x_pos = positions[i];
+    y_pos = getY(x_pos);
+    console.log(`Body ${i} X: ${x_pos}, Y: ${y_pos}`);
+    var body = Bodies.circle(
+      x_pos,
+      y_pos,
+      10
+    );
+    Composite.add(engine.world, body);
+  }
+
+  // var circle2 = Bodies.circle(
+  //   render.canvas.width / 2,
+  //   render.canvas.height * 0.2,
+  //   10,
+  //   {
+  //     render: {
+  //       fillStyle: "#FF5733",
+  //     },
+  //     restitution: 0.8,
+  //   }
+  // );
+  // Composite.add(engine.world, circle2);
+
+  var height = document.documentElement.clientHeight;
+  var width = document.documentElement.clientWidth;
+  var ground = Bodies.rectangle(width / 2, height, width - 30, 60);
+  Body.setStatic(ground, true);
+
+  // add all of the bodies to the world
+
+  setTimeout(() => {
+    Matter.Sleeping.set(circle, false);
+    sign = -1;
+    console.log("timeout triggered");
+  }, 5000);
+
+  setTimeout(() => {
+    // Matter.Sleeping.set(circle, false);
+    sign = 0;
+    console.log("second timeout triggered");
+  }, 6500);
 
   // run the renderer
   Render.run(render);
