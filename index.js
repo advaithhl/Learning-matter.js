@@ -47,8 +47,8 @@ window.addEventListener("load", () => {
         attractors: [
           function (bodyA, bodyB) {
             return {
-              x: sign * (bodyA.position.x - bodyB.position.x) * 1e-6,
-              y: sign * (bodyA.position.y - bodyB.position.y) * 1e-6,
+              x: sign * (bodyA.position.x - bodyB.position.x) * 5e-8,
+              y: sign * (bodyA.position.y - bodyB.position.y) * 5e-8,
             };
           },
         ],
